@@ -1,5 +1,6 @@
 from stack import *
 from queue import *
+from mergesort import *
 
 def stack_test_push(stack):
     stack.push(1)
@@ -35,6 +36,12 @@ def queue_test_poll(queue):
     assert(str(queue) == ""), "Queue should be empty"
 
 
+def mergesort_test():
+    array = [5, 3, 1, 2, 4, 5]
+    array = mergesort(array)
+    assert(array == [1, 2, 3, 4, 5, 5]), "Merge sort should've sorted these items"
+
+
 if __name__ == "__main__":
     stack = Stack()
     stack_test_push(stack)
@@ -42,4 +49,5 @@ if __name__ == "__main__":
     queue = Queue()
     queue_test_add(queue)
     queue_test_poll(queue)
+    mergesort_test()
     print("All tests passed")
