@@ -58,3 +58,6 @@ class Stack:
 
     def is_empty(self):
         return not self.head
+
+    def empty(self):
+        self.head = None
