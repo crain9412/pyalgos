@@ -2,14 +2,12 @@
 
 
 class Node:
-    data = None
-    next = None
-
     def __init__(self, data):
         self.data = data
+        self.next = None
         
     def __str__(self):
-        return "[" + str(self.data) + "]"
+        return "[%s]" % str(self.data)
         
     def set_next(self, next):
         self.next = next
@@ -22,8 +20,6 @@ class Node:
 
 
 class Stack:
-    head = None
-
     def __init__(self):
         self.head = None
         
@@ -59,3 +55,6 @@ class Stack:
             self.head = self.head.get_next()
 
         return removed_node.get_data()
+
+    def is_empty(self):
+        return not self.head

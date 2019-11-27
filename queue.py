@@ -1,15 +1,13 @@
 """Queue with a doubly linked list implementation for O(1) queue and dequeue"""
 
 class Node:
-    next = None
-    prev = None
-    data = None
-
     def __init__(self, data):
         self.data = data
+        self.prev = None
+        self.next = None
 
     def __str__(self):
-        return "[" + str(self.data) + "]"
+        return "[%s]" % str(self.data)
 
     def get_next(self):
         return self.next
@@ -28,9 +26,6 @@ class Node:
 
 
 class Queue:
-    head = None
-    tail = None
-
     def __init__(self):
         self.head = None
         self.tail = None
@@ -70,3 +65,10 @@ class Queue:
             self.head = removed_node.get_next()
 
         return removed_node.get_data()
+
+    def is_empty(self):
+        return not self.head
+
+    def empty(self):
+        self.head = None
+        self.tail = None

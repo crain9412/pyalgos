@@ -1,7 +1,8 @@
-from stack import *
-from queue import *
+from stack import Stack
+from queue import Queue
 from mergesort import *
 from quicksort import *
+from graph import *
 
 def stack_test_push(stack):
     stack.push(1)
@@ -49,6 +50,34 @@ def quicksort_test():
     assert (array == [1, 2, 3, 4, 5, 5]), "Quick sort should've sorted these items"
 
 
+def graph_test():
+    graph = Graph()
+
+    node_a = Node("Animal")
+    node_b = Node("Mammal")
+    node_c = Node("Cat")
+    node_d = Node("Dog")
+    node_e = Node("Hammer")
+    node_f = Node("Axe")
+    node_g = Node("Tree")
+
+    node_a.add_adjacent_node(node_b)
+    node_b.add_adjacent_node(node_c)
+    node_b.add_adjacent_node(node_d)
+    #node_d.add_adjacent_node(node_a)
+    node_e.add_adjacent_node(node_f)
+
+    graph.add_node(node_a)
+    graph.add_node(node_b)
+    graph.add_node(node_c)
+    graph.add_node(node_d)
+    graph.add_node(node_e)
+    graph.add_node(node_f)
+    graph.add_node(node_g)
+
+    print(str(graph))
+
+
 if __name__ == "__main__":
     stack = Stack()
     stack_test_push(stack)
@@ -58,4 +87,5 @@ if __name__ == "__main__":
     queue_test_poll(queue)
     mergesort_test()
     quicksort_test()
+    graph_test()
     print("All tests passed")
