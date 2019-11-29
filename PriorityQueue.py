@@ -8,7 +8,6 @@ class PriorityQueue:
     def add(self, item):
         self.heap.append(item)
         self.heapify_up(len(self.heap) - 1)
-        print(self)
 
     def poll(self):
         self.swap(0, len(self.heap) - 1)

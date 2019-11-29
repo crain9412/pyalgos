@@ -90,7 +90,6 @@ class Graph:
                 current_node.set_active(True)
 
                 for adjacent_node in current_node.get_adjacent_nodes():
-                    print("Adding adjacent node %s" % adjacent_node)
                     stack.push(adjacent_node)
 
         return False
