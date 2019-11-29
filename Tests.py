@@ -4,6 +4,7 @@ from Mergesort import *
 from Quicksort import *
 from Graph import *
 from WeightedUndirectedGraph import WeightedUndirectedGraph as WUG, Node as WUGNode
+from PriorityQueue import *
 
 def stack_test_push(stack):
     stack.push(1)
@@ -82,8 +83,13 @@ def graph_test():
     graph.add_node(forever)
 
     assert(graph.breadth_first_search(animal, "Dog") is not None), "Breadth first search should find Dog from Animal"
-    assert (graph.breadth_first_search(tool, "Hammer") is not None), "Depth first search should find Hammer from Tool"
-    assert (graph.breadth_first_search(mammal, "Hammer") is None), "Depth first search shouldn't find Hammer from Mammal"
+    assert(graph.breadth_first_search(tool, "Hammer") is not None), "Depth first search should find Hammer from Tool"
+    assert(graph.breadth_first_search(mammal, "Hammer") is None), "Depth first search shouldn't find Hammer from Mammal"
+    assert(graph.has_cycle()), "Graph should have a cycle, has cycle should return true"
+    graph.remove_node(goes)
+    graph.remove_node(forever)
+    print(str(graph))
+    assert(not graph.has_cycle()), "Graph should no longer have a cycle"
 
 
 def WUG_test():
@@ -110,7 +116,29 @@ def WUG_test():
     graph.add_node(node_e)
     graph.add_node(node_f)
 
-    print(str(graph))
+def priority_queue_test():
+    priority_queue = PriorityQueue()
+
+    priority_queue.add(1)
+    priority_queue.add(8)
+    priority_queue.add(5)
+    priority_queue.add(3)
+    priority_queue.add(4)
+    priority_queue.add(2)
+    priority_queue.add(6)
+    priority_queue.add(7)
+    priority_queue.add(0)
+
+    i = 0
+
+    # this effectively tests heap sort as well...
+    while not priority_queue.is_empty():
+        number_polled = priority_queue.poll()
+        assert(number_polled == i), "Expected %s got %s from priority queue" % (i, number_polled)
+        i = i + 1
+
+
+
 
 if __name__ == "__main__":
     stack = Stack()
@@ -123,4 +151,5 @@ if __name__ == "__main__":
     quicksort_test()
     graph_test()
     WUG_test()
+    priority_queue_test()
     print("All tests passed")

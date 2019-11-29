@@ -1,5 +1,6 @@
 from Queue import Queue
 from Stack import Stack
+import sys
 
 class WeightedUndirectedGraph:
     def __init__(self):
@@ -65,12 +66,46 @@ class WeightedUndirectedGraph:
 
         return found
 
+    def dijkstras(self, source, target):
+        for node in self.nodes:
+            node.set_cost(sys.maxsize)
+        queue = Queue()
+        graph_string = ""
+        self.set_all_nodes_unvisited()
+        queue.empty()
+        queue.add(source)
+        node_string = ""
+        current_node = source
+
+        while not queue.is_empty() and current_node.data != target.data:
+            current_node = queue.poll()
+
+            if current_node.is_visited():
+                continue
+
+            current_node.set_visited(True)
+
+            minimum_cost_node = None
+            minimum_cost = sys.maxsize
+
+            for edge in current_node.get_edges():
+                new_neighbor_cost = current_node.get_cost() + edge.get_weight()
+                if new_neighbor_cost < edge.get_node().get_cost():
+                    edge.get_node().set_cost(new_neighbor_cost)
+                if new_neighbor_cost < minimum_cost:
+                    minimum_cost = new_neighbor_cost
+                    minimum_cost_node = edge.get_node()
+                    
+            queue.add(minimum_cost_node)
+
+
+
+
+
     # Print adjacent nodes and weights
     def __str__(self):
         queue = Queue()
         graph_string = ""
-
-        print("Searching WUG")
 
         for node in self.nodes:
             self.set_all_nodes_unvisited()
@@ -118,7 +153,7 @@ class Node:
         self.data = data
         self.visited = False
         self.active = False
-        self.weight = 0
+        self.cost = 0
 
     def set_visited(self, visited):
         self.visited = visited
@@ -132,6 +167,12 @@ class Node:
 
     def get_edges(self):
         return self.edges
+
+    def set_cost(self, cost):
+        self.cost = cost
+
+    def get_cost(self):
+        return self.cost
 
     def __str__(self):
         return "[%s]" % self.data
