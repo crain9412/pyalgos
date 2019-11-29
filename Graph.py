@@ -1,6 +1,7 @@
 from Queue import Queue
 from Stack import Stack
 
+
 class Graph:
     def __init__(self):
         self.nodes = set()

@@ -1,24 +1,6 @@
 """Stack with a singly linked list implementation for O(1) push and pop"""
 
 
-class Node:
-    def __init__(self, data):
-        self.data = data
-        self.next = None
-        
-    def __str__(self):
-        return "[%s]" % str(self.data)
-        
-    def set_next(self, next):
-        self.next = next
-        
-    def get_next(self):
-        return self.next
-
-    def get_data(self):
-        return self.data
-
-
 class Stack:
     def __init__(self):
         self.head = None
@@ -61,3 +43,21 @@ class Stack:
 
     def empty(self):
         self.head = None
+
+
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+    def __str__(self):
+        return "[%s]" % str(self.data)
+
+    def set_next(self, next):
+        self.next = next
+
+    def get_next(self):
+        return self.next
+
+    def get_data(self):
+        return self.data
