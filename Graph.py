@@ -8,9 +8,16 @@ class Graph:
     def add_node(self, node):
         self.nodes.add(node)
 
+    def remove_node(self, node):
+        self.nodes.remove(node)
+
     def set_all_nodes_unvisited(self):
         for node in self.nodes:
             node.set_visited(False)
+
+    def set_all_nodes_inactive(self):
+        for node in self.nodes:
+            node.set_active(False)
 
     def get_size(self):
         return len(self.nodes)
@@ -34,7 +41,7 @@ class Graph:
 
             current_node.set_visited(True)
 
-            for adjacent_node in current_node.get_edges():
+            for adjacent_node in current_node.get_adjacent_nodes():
                 if not adjacent_node.is_visited():
                     stack.push(adjacent_node)
 
@@ -65,6 +72,28 @@ class Graph:
 
         return found
 
+    def has_cycle(self):
+        stack = Stack()
+
+        for node in self.nodes:
+            self.set_all_nodes_inactive()
+            stack.empty()
+            stack.push(node)
+
+            while not stack.is_empty():
+                current_node = stack.pop()
+
+                if current_node.is_active():
+                    return True
+
+                current_node.set_active(True)
+
+                for adjacent_node in current_node.get_adjacent_nodes():
+                    print("Adding adjacent node %s" % adjacent_node)
+                    stack.push(adjacent_node)
+
+        return False
+
     # BFS from each node to print all connections
     def __str__(self):
         queue = Queue()
@@ -85,7 +114,7 @@ class Graph:
                 current_node.set_visited(True)
                 node_string += str(current_node) + " -> "
 
-                for adjacent_node in current_node.get_edges():
+                for adjacent_node in current_node.get_adjacent_nodes():
                     if not adjacent_node.is_visited():
                         queue.add(adjacent_node)
 
@@ -107,6 +136,12 @@ class Node:
 
     def is_visited(self):
         return self.visited
+
+    def set_active(self, active):
+        self.active = active
+
+    def is_active(self):
+        return self.active
 
     def add_adjacent_node(self, node):
         self.adjacent_nodes.add(node)
