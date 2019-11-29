@@ -3,6 +3,7 @@ from Queue import Queue
 from Mergesort import *
 from Quicksort import *
 from Graph import *
+from WeightedUndirectedGraph import WeightedUndirectedGraph, Node as weighted_undirected_graph_node
 from PriorityQueue import *
 
 def stack_test_push(stack):
@@ -90,6 +91,33 @@ def graph_test():
     assert(not graph.has_cycle()), "Graph should no longer have a cycle"
 
 
+def WUG_test():
+    graph = WeightedUndirectedGraph()
+
+    node_a = weighted_undirected_graph_node("A")
+    node_b = weighted_undirected_graph_node("B")
+    node_c = weighted_undirected_graph_node("C")
+    node_d = weighted_undirected_graph_node("D")
+    node_e = weighted_undirected_graph_node("E")
+    node_f = weighted_undirected_graph_node("F")
+
+    node_a.add_edge(node_b, 4)
+    node_b.add_edge(node_c, 2)
+    node_b.add_edge(node_d, 5)
+    node_c.add_edge(node_d, 1)
+    node_a.add_edge(node_e, 3)
+    node_d.add_edge(node_f, 1)
+
+    graph.add_node(node_a)
+    graph.add_node(node_b)
+    graph.add_node(node_c)
+    graph.add_node(node_d)
+    graph.add_node(node_e)
+    graph.add_node(node_f)
+
+    assert (graph.breadth_first_search(node_a, "F") is not None), "F should be reachable from A"
+    assert (graph.depth_first_search(node_b, "E") is not None), "E should be reachable from B"
+
 def priority_queue_test():
     priority_queue = PriorityQueue()
 
@@ -112,6 +140,8 @@ def priority_queue_test():
         i = i + 1
 
 
+
+
 if __name__ == "__main__":
     stack = Stack()
     stack_test_push(stack)
@@ -122,5 +152,6 @@ if __name__ == "__main__":
     mergesort_test()
     quicksort_test()
     graph_test()
+    WUG_test()
     priority_queue_test()
     print("All tests passed")

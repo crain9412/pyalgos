@@ -1,6 +1,7 @@
 from Queue import Queue
 from Stack import Stack
 
+
 class WeightedUndirectedGraph:
     def __init__(self):
         self.nodes = set()
@@ -34,9 +35,9 @@ class WeightedUndirectedGraph:
 
             current_node.set_visited(True)
 
-            for adjacent_node in current_node.get_edges():
-                if not adjacent_node.is_visited():
-                    stack.push(adjacent_node)
+            for edge in current_node.get_edges():
+                if not edge.get_node().is_visited():
+                    stack.push(edge.get_node())
 
         return found
 
@@ -59,9 +60,9 @@ class WeightedUndirectedGraph:
 
             current_node.set_visited(True)
 
-            for adjacent_node in current_node.get_edges():
-                if not adjacent_node.is_visited():
-                    queue.add(adjacent_node)
+            for edge in current_node.get_edges():
+                if not edge.get_node().is_visited():
+                    queue.add(edge.get_node())
 
         return found
 
